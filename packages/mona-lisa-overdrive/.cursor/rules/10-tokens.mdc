@@ -1,0 +1,50 @@
+---
+description: Design token discipline
+globs: ["src/tokens/**/*", "src/**/*.tsx", "src/**/*.ts"]
+alwaysApply: false
+---
+
+# Token rules
+
+Tokens are the ONLY source of truth for visual properties in Mona Lisa
+Overdrive. No hardcoded values in components, ever.
+
+## Token hierarchy
+
+1. **Primitive tokens** (`tokens/primitives.ts`) — raw values: colors,
+   spacing scale, font sizes. Named descriptively, not semantically
+   (`slate-900`, not `background`).
+2. **Semantic tokens** (`tokens/semantic.ts`) — map primitives to intent:
+   `bg.canvas`, `fg.default`, `border.subtle`, `accent.solid`.
+3. **Component tokens** (`tokens/components/*.ts`) — component-specific:
+   `window.chrome.height`, `taskbar.icon.size`.
+
+Components consume **semantic** tokens. They never reach for primitives
+directly.
+
+## Tailwind v4 integration
+
+All tokens are emitted as CSS variables via the `@theme` directive in
+`src/styles/theme.css`. Tailwind v4 automatically generates utility
+classes from these.
+
+```css
+@theme {
+  --color-bg-canvas: oklch(0.15 0.02 240);
+  --color-fg-default: oklch(0.95 0.01 240);
+  --spacing-window-chrome: 2rem;
+}
+```
+
+## Theme switching
+
+A theme is a complete set of semantic token overrides. Themes are
+distributed as CSS files that redefine the `@theme` variables under a
+selector (`[data-theme="neon-noir"]`). Components are unaware of which
+theme is active — they only consume CSS variables.
+
+## Never
+
+- Never hardcode hex, rgb, hsl, oklch, or named colors in a component.
+- Never hardcode pixel/rem values for spacing. Use the spacing scale.
+- Never reference a primitive token from a component. Go through semantic.

@@ -1,0 +1,71 @@
+---
+description: Component authoring pattern
+globs: ["src/components/**/*.tsx", "src/os/**/*.tsx"]
+alwaysApply: false
+---
+
+# Component pattern
+
+Every component in Mona Lisa Overdrive follows this exact shape. Do not
+deviate without updating this rule first.
+
+## Directory layout
+
+src/components/button/
+├── button.tsx        # Implementation
+├── button.variants.ts # CVA definitions (if complex)
+├── button.stories.tsx # Storybook
+├── button.test.tsx   # Vitest
+└── index.ts          # Explicit named re-exports
+
+## The canonical shape
+
+```tsx
+import { forwardRef } from "react";
+import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "@/lib/cn";
+
+const buttonVariants = cva(
+  // base classes — use semantic tokens via tailwind
+  "inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-solid disabled:pointer-events-none disabled:opacity-50",
+  {
+    variants: {
+      intent: {
+        primary: "bg-accent-solid text-accent-fg hover:bg-accent-emphasis",
+        secondary: "bg-bg-subtle text-fg-default hover:bg-bg-muted",
+        ghost: "hover:bg-bg-subtle",
+      },
+      size: {
+        sm: "h-8 px-3 text-sm",
+        md: "h-10 px-4 text-base",
+        lg: "h-12 px-6 text-lg",
+      },
+    },
+    defaultVariants: { intent: "primary", size: "md" },
+  }
+);
+
+export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
+  VariantProps<typeof buttonVariants>;
+
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, intent, size, ...props }, ref) => (
+    <button
+      ref={ref}
+      data-slot="button"
+      className={cn(buttonVariants({ intent, size }), className)}
+      {...props}
+    />
+  )
+);
+Button.displayName = "Button";
+```
+
+## Non-negotiable
+
+- `forwardRef` + `displayName`
+- `data-slot` attribute
+- CVA for variants (not `if/else`)
+- `cn()` helper for className merging
+- Props extend the native element's props
+- Named export only

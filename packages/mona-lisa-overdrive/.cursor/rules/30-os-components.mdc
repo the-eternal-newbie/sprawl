@@ -1,0 +1,46 @@
+---
+description: OS-metaphor component rules (Window, Taskbar, Dock, etc.)
+globs: ["src/os/**/*"]
+alwaysApply: false
+---
+
+# OS component rules
+
+Components under `src/os/` implement the Sprawl operating system
+metaphor. They are higher-level than primitives and carry additional
+constraints.
+
+## State ownership
+
+- OS components do NOT own window manager state. They receive it as
+  props from `neuromancer` (the window manager package in Burning
+  Chrome).
+- A `<Window>` component renders a window. It does not decide where
+  the window lives, its z-index, or whether it's focused. Those are
+  kernel concerns.
+- This separation is critical for testability and for the multi-runtime
+  app loader.
+
+## Required slots
+
+Every OS component exposes named slots via `data-slot`:
+- `<Window>`: `chrome`, `titlebar`, `controls`, `body`, `resize-handle`
+- `<Taskbar>`: `start`, `items`, `tray`, `clock`
+- `<Dock>`: `items`, `separator`
+
+Consumers theme these via `[data-slot="..."]` selectors.
+
+## Accessibility
+
+- Windows must trap focus when modal, release when not. Use Radix
+  `FocusScope`.
+- Every interactive OS element has a keyboard equivalent (Cmd+W to
+  close, arrow keys to navigate taskbar, etc.).
+- Screen readers must announce window open/close and focus changes.
+
+## Animation
+
+- Use `motion` tokens from `tokens/motion.ts`.
+- Respect `prefers-reduced-motion` — this is enforced by a test.
+- Framer Motion is allowed for OS components only (primitives stay
+  dependency-free).

@@ -1,0 +1,38 @@
+---
+description: Core engineering rules for Mona Lisa Overdrive
+globs: ["**/*"]
+alwaysApply: true
+---
+
+# Core rules
+
+## Stack (authoritative)
+
+- React 19.2 (use forwardRef, avoid manual memoization — trust the compiler)
+- TypeScript strict mode — no `any`, no `@ts-ignore` without a comment
+- Tailwind v4 with `@theme` directive for tokens
+- CVA (class-variance-authority) for variants
+- Radix UI primitives for behavior
+- Vitest + @testing-library/react for unit tests
+- Storybook 8 for component docs
+- tsup for library builds
+
+## Forbidden
+
+- `useMemo`, `useCallback`, `React.memo` — React 19 compiler handles this
+- Inline styles (`style={{...}}`) except for truly dynamic values
+  (e.g., drag position, computed z-index)
+- Barrel files that re-export everything (`export * from`) — use explicit
+  named exports, agents and bundlers both hate barrels
+- `any`, `unknown` without narrowing, or `as` casts without justification
+- Default exports for components — always named exports
+- CSS-in-JS libraries (styled-components, emotion) — Tailwind only
+- Importing from `react-dom` in component code (kernel only)
+
+## Required for every component file
+
+- Named export matching the filename
+- `ComponentProps` type exported alongside
+- `forwardRef` wrapping for any component that renders a DOM element
+- A `displayName` for forwardRef components
+- `data-slot` attributes on internal parts for styling hooks

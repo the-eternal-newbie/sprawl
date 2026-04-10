@@ -1,0 +1,30 @@
+---
+description: Testing requirements
+globs: ["**/*.test.*", "**/*.stories.*"]
+alwaysApply: false
+---
+
+# Testing rules
+
+## Unit tests (Vitest)
+
+Every component ships with a test file covering:
+1. Renders without crashing with default props
+2. Applies each variant correctly (snapshot class names)
+3. Forwards refs correctly
+4. Forwards native HTML props (`data-*`, `aria-*`, `onClick`)
+5. Accessibility — `axe` assertion via `vitest-axe`
+
+## Storybook
+
+Every component ships with a story file containing:
+1. A `Default` story
+2. A story per variant
+3. A `Playground` story with `argTypes` for all props
+4. An `Accessibility` story showing keyboard interaction
+
+## Never
+
+- No `setTimeout` in tests. Use `await` with Testing Library queries.
+- No snapshot-only tests. Assertions must be meaningful.
+- No skipped tests committed (`.skip`, `.only`).

@@ -1,0 +1,40 @@
+{
+    "name": "mona-lisa-overdrive",
+    "version": "0.0.0",
+    "description": "Design system for Sprawl. The aesthetic backbone.",
+    "type": "module",
+    "main": "./dist/index.js",
+    "module": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.js"
+      },
+      "./styles.css": "./dist/styles.css",
+      "./themes/*.css": "./dist/themes/*.css"
+    },
+    "files": ["dist", "README.md"],
+    "scripts": {
+      "dev": "ladle serve",
+      "build": "tsup && pnpm run build:css",
+      "build:css": "...",
+      "test": "vitest run",
+      "test:watch": "vitest",
+      "lint": "eslint src",
+      "typecheck": "tsc --noEmit",
+      "clean": "rm -rf dist .turbo"
+    },
+    "peerDependencies": {
+      "react": "^19.0.0",
+      "react-dom": "^19.0.0"
+    },
+    "devDependencies": {
+      "@ladle/react": "^4.1.0",
+      "@types/react": "^19.0.0",
+      "@types/react-dom": "^19.0.0",
+      "tsup": "^8.3.0",
+      "typescript": "^5.7.0",
+      "vitest": "^2.1.0"
+    }
+  }
