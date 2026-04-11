@@ -1,6 +1,7 @@
 import type { GlobalProvider } from "@ladle/react";
 import { useEffect } from "react";
-import "../src/styles/theme.css";
+import "./styles.css";
+
 import "../src/themes/galactic-terminal.css";
 
 export const Provider: GlobalProvider = ({ children }) => {
