@@ -9,3 +9,16 @@
  */
 
 export { cn } from "./lib/cn.js";
+
+// Motion
+export {
+    MotionProvider,
+    MotionContext,
+    useMotionPolicy,
+} from "./motion/index.js";
+
+export type {
+    MotionPolicy,
+    MotionContextValue,
+    MotionProviderProps,
+} from "./motion/index.js";
