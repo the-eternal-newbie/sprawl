@@ -17,7 +17,7 @@ export const Default: Story = () => (
       Terminal theme is wired up correctly.
     </p>
     <div
-      className="mt-8 p-4 border border-border-accent-primary bg-bg-emphasis"
+      className="mt-8 p-4 border border-border-accent-primary bg-bg-subtle"
     >
       <div className="text-accent-secondary">
         SECONDARY ACCENT: electric cyan
