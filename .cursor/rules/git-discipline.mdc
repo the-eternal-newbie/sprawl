@@ -1,0 +1,110 @@
+---
+description: Git and version control discipline for Sprawl monorepo
+globs: ["**/*"]
+alwaysApply: true
+---
+
+# Git discipline
+
+These rules apply to every git operation in the Sprawl monorepo.
+They are non-negotiable and take precedence over user convenience.
+
+## Branches
+
+### Never commit directly to main
+- `main` is protected. You must work on a branch.
+- If the current branch is `main` and the user asks you to commit,
+  stop and tell them: "You're on main. Let's create a branch first.
+  What should I name it?"
+- If the user insists on committing to main after being warned,
+  refuse. This is a hard rule.
+
+### Branch naming
+Use the format `<type>/<scope>-<short-description>` in kebab-case.
+
+- `type`: one of `feat`, `fix`, `chore`, `docs`, `refactor`, `test`
+- `scope`: the package short-name (`mlo`, `bc`, `nm`, `mm`, `sprawl`
+  for monorepo-wide changes)
+- `short-description`: 2–5 words describing the work
+
+Examples:
+- `feat/mlo-scaffold`
+- `feat/mlo-button-component`
+- `fix/mlo-token-contrast`
+- `chore/sprawl-deps-bump`
+- `docs/mlo-component-authoring`
+
+Never use:
+- Spaces or underscores (use hyphens)
+- Capital letters
+- Long descriptions (>5 words)
+- Generic names like `update`, `changes`, `wip`
+
+## Commits
+
+### Conventional Commits, scoped by package
+Every commit follows this format:
+
+<type>(<scope>): <description>
+[optional body]
+[optional footer]
+
+- `type`: matches branch type (`feat`, `fix`, `chore`, `docs`, `refactor`, `test`)
+- `scope`: package short-name (`mlo`, `bc`, `nm`, `mm`, `sprawl`)
+- `description`: imperative mood, no trailing period, 50 chars max
+  - Good: `add Button component with primary variant`
+  - Bad: `Added a Button component.`
+
+Examples:
+
+feat(mlo): add three-accent theme system
+fix(mlo): correct fg.default color in galactic-terminal
+chore(sprawl): pin Node version to 22.11.0
+docs(mlo): expand component authoring guide
+
+### When to commit
+- After each logical unit of work is complete and tests pass
+- Never commit broken code to a branch unless explicitly asked
+- Never commit with failing typecheck or lint
+- Never commit secrets, API keys, .env files, or generated build output
+- Never `git add .` blindly — stage specific files you know you changed
+
+### Pre-commit checks
+Before any commit, run in this order:
+1. `pnpm typecheck` — must pass
+2. `pnpm lint` — must pass
+3. `pnpm test` — must pass (skip only if the commit is a WIP on a branch
+   and the user has explicitly said "it's okay, tests are broken, I'm
+   saving progress")
+
+If any check fails, stop and report the failure. Do not commit broken
+state to the user's branch without explicit consent.
+
+## Pull requests
+
+### When work is complete
+- Ensure all pre-commit checks pass on the final commit
+- Push the branch to the remote
+- Open a PR to `main` (do not merge directly)
+- The PR title matches the final commit title (or a summary of the
+  branch if multiple commits)
+- The PR body lists what changed, why, and any follow-ups needed
+
+### Never merge your own PRs
+- Even when working solo, the user opens and merges PRs through the
+  GitHub UI
+- Your job ends at "branch pushed, PR opened"
+- Do not run `gh pr merge` or equivalent
+
+## Forbidden operations
+
+Without explicit user confirmation:
+- `git push --force` or `git push -f` to any branch
+- `git reset --hard` to any commit that has been pushed
+- `git rebase` on branches that have been pushed
+- `git commit --amend` on commits that have been pushed
+- Deleting branches that exist on the remote
+- Merging anything into `main`
+
+These operations rewrite or destroy history and can cause data loss.
+Always ask before performing them.
