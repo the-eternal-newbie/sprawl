@@ -68,8 +68,6 @@ export default tseslint.config(
   {
     // Ladle stories need default exports
     files: ["**/*.stories.{ts,tsx}"],
-    rules: {
-      "import/no-default-export": "off",
-    },
+    rules: {},
   },
 );
