@@ -1,0 +1,93 @@
+/*
+ * Mona Lisa Overdrive — Galactic Terminal theme
+ *
+ * The "Ghost in the Machine": a high-frequency digital autopsy of a
+ * high-performance system. This is the canonical reference theme.
+ *
+ * Generated manually from design-refs/galactic-terminal/normalized/DESIGN.md
+ * Future themes are generated automatically by /import-stitch-theme.
+ */
+
+ [data-theme="galactic-terminal"] {
+    color-scheme: dark;
+  
+    /* ============================================================ */
+    /* Color primitives (theme-local, not exposed to components)    */
+    /* ============================================================ */
+    --terminal-onyx-950: #120422;
+    --terminal-onyx-900: #1b0c2b;
+    --terminal-onyx-800: #2a1540;
+  
+    --neon-fuchsia-500: #ff00ff;
+    --neon-fuchsia-600: #cc00cc;
+    --neon-fuchsia-800: #800080;
+  
+    --electric-cyan-500: #00f3ff;
+    --acid-lime-500: #dfff00;
+  
+    --cool-white-50: #f0e6f6;
+    --violet-gray-400: #7a6b8a;
+    --shadow-gray-600: #4a3b5c;
+  
+    --signal-red-500: #ff3b30;
+    --data-green-500: #00ff41;
+  
+    /* ============================================================ */
+    /* Semantic intents (what components consume)                   */
+    /* ============================================================ */
+  
+    /* Surfaces */
+    --color-bg-canvas: var(--terminal-onyx-950);
+    --color-bg-subtle: var(--terminal-onyx-900);
+    --color-bg-muted: var(--terminal-onyx-800);
+    --color-bg-emphasis: var(--neon-fuchsia-500);
+  
+    /* Foreground */
+    --color-fg-default: var(--cool-white-50);
+    --color-fg-muted: var(--violet-gray-400);
+    --color-fg-subtle: var(--shadow-gray-600);
+  
+    --color-fg-on-accent-primary: var(--terminal-onyx-950);
+    --color-fg-on-accent-secondary: var(--terminal-onyx-950);
+    --color-fg-on-accent-tertiary: var(--terminal-onyx-950);
+  
+    /* Accents */
+    --color-accent-primary: var(--neon-fuchsia-500);
+    --color-accent-secondary: var(--electric-cyan-500);
+    --color-accent-tertiary: var(--acid-lime-500);
+  
+    /* Borders */
+    --color-border-subtle: var(--terminal-onyx-800);
+    --color-border-default: var(--neon-fuchsia-800);
+    --color-border-strong: var(--cool-white-50);
+  
+    --color-border-accent-primary: var(--neon-fuchsia-500);
+    --color-border-accent-secondary: var(--electric-cyan-500);
+    --color-border-accent-tertiary: var(--acid-lime-500);
+  
+    /* State intents */
+    --color-danger-solid: var(--signal-red-500);
+    --color-success-solid: var(--data-green-500);
+    --color-warning-solid: var(--acid-lime-500);
+    --color-info-solid: var(--electric-cyan-500);
+  
+    /* Typography — Galactic Terminal uses JetBrains Mono for mono */
+    --font-display: "Space Grotesk", sans-serif;
+    --font-headline: "Space Grotesk", sans-serif;
+    --font-title: "Space Grotesk", sans-serif;
+    --font-body: "Inter", sans-serif;
+    --font-label: "Space Grotesk", sans-serif;
+    --font-mono: "JetBrains Mono", monospace;
+  
+    /* Radii — Galactic Terminal is 100% sharp */
+    --radius-none: 0;
+    --radius-sm: 0;
+    --radius-md: 0;
+    --radius-lg: 0;
+    --radius-full: 9999px;
+  
+    /* OS tokens */
+    --size-window-chrome: 2rem;
+    --size-taskbar: 3rem;
+    --size-dock-icon: 2.5rem;
+  }

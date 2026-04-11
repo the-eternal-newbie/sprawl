@@ -1,0 +1,116 @@
+@import "tailwindcss";
+
+/*
+ * Mona Lisa Overdrive — canonical theme variables
+ *
+ * This file defines the vocabulary of semantic tokens that every
+ * theme overrides. Default values here are neutral placeholders;
+ * real values come from theme files under src/themes/.
+ *
+ * The @theme directive is Tailwind v4's replacement for tailwind.config.
+ * Variables declared here become Tailwind utilities automatically:
+ *   --color-bg-canvas  →  bg-bg-canvas
+ *   --color-fg-default →  text-fg-default
+ *   --font-body        →  font-body
+ */
+
+@theme {
+  /* ============================================================ */
+  /* Surfaces                                                     */
+  /* ============================================================ */
+  --color-bg-canvas: #0a0a0a;
+  --color-bg-subtle: #141414;
+  --color-bg-muted: #1f1f1f;
+  --color-bg-emphasis: #2a2a2a;
+
+  /* ============================================================ */
+  /* Foreground                                                   */
+  /* ============================================================ */
+  --color-fg-default: #f5f5f5;
+  --color-fg-muted: #a3a3a3;
+  --color-fg-subtle: #525252;
+
+  --color-fg-on-accent-primary: #0a0a0a;
+  --color-fg-on-accent-secondary: #0a0a0a;
+  --color-fg-on-accent-tertiary: #0a0a0a;
+
+  /* ============================================================ */
+  /* Accents (three-accent schema)                                */
+  /* ============================================================ */
+  --color-accent-primary: #ffffff;
+  --color-accent-secondary: #ffffff;
+  --color-accent-tertiary: #ffffff;
+
+  /* ============================================================ */
+  /* Borders                                                      */
+  /* ============================================================ */
+  --color-border-subtle: #262626;
+  --color-border-default: #404040;
+  --color-border-strong: #737373;
+
+  --color-border-accent-primary: #ffffff;
+  --color-border-accent-secondary: #ffffff;
+  --color-border-accent-tertiary: #ffffff;
+
+  /* ============================================================ */
+  /* State intents                                                */
+  /* ============================================================ */
+  --color-danger-solid: #ef4444;
+  --color-success-solid: #22c55e;
+  --color-warning-solid: #eab308;
+  --color-info-solid: #3b82f6;
+
+  /* ============================================================ */
+  /* Typography                                                   */
+  /* ============================================================ */
+  --font-display: "Space Grotesk", sans-serif;
+  --font-headline: "Space Grotesk", sans-serif;
+  --font-title: "Space Grotesk", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-label: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* ============================================================ */
+  /* Radii                                                        */
+  /* ============================================================ */
+  --radius-none: 0;
+  --radius-sm: 0.125rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-full: 9999px;
+
+  /* ============================================================ */
+  /* OS-specific tokens                                           */
+  /* ============================================================ */
+  --size-window-chrome: 2rem;
+  --size-taskbar: 2.5rem;
+  --size-dock-icon: 2.5rem;
+}
+
+/*
+ * Root defaults — every theme overrides these under [data-theme="..."]
+ * selectors. This ensures an unthemed page still renders something
+ * reasonable instead of a blank white canvas.
+ */
+:root {
+  background: var(--color-bg-canvas);
+  color: var(--color-fg-default);
+  font-family: var(--font-body);
+  color-scheme: dark;
+}
+
+/*
+ * Respect prefers-reduced-motion globally.
+ * Themes and components can layer more specific motion controls
+ * on top of this baseline.
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
