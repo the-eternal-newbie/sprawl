@@ -35,3 +35,6 @@ pnpm-debug.log*
 
 # Ladle
 .ladle/build/
+
+# Ignore images from design refs
+packages/mona-lisa-overdrive/design-refs/**/img/
