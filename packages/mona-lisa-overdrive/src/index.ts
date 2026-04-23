@@ -10,6 +10,8 @@
 
 export { cn } from "./lib/cn.js";
 
+export { Button, type ButtonProps } from "./components/button/index.js";
+
 // Motion
 export {
     MotionProvider,
