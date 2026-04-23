@@ -9,3 +9,18 @@
  */
 
 export { cn } from "./lib/cn.js";
+
+export { Button, type ButtonProps } from "./components/button/index.js";
+
+// Motion
+export {
+    MotionProvider,
+    MotionContext,
+    useMotionPolicy,
+} from "./motion/index.js";
+
+export type {
+    MotionPolicy,
+    MotionContextValue,
+    MotionProviderProps,
+} from "./motion/index.js";

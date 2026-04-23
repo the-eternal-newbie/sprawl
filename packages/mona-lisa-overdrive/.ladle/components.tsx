@@ -1,8 +1,11 @@
+import React, { useEffect } from "react";
 import type { GlobalProvider } from "@ladle/react";
-import { useEffect } from "react";
-import "./styles.css";
 
+import "./styles.css";
 import "../src/themes/galactic-terminal.css";
+
+
+import { MotionProvider } from "../src/motion/index.js";
 
 export const Provider: GlobalProvider = ({ children }) => {
   // For now, always apply the galactic-terminal theme.
@@ -11,5 +14,5 @@ export const Provider: GlobalProvider = ({ children }) => {
     document.documentElement.setAttribute("data-theme", "galactic-terminal");
   }, []);
 
-  return children;
+  return <MotionProvider>{children}</MotionProvider>;
 };
